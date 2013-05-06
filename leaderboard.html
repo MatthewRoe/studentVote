@@ -1,0 +1,62 @@
+<!--This code is partially based on the meteor.com leaderboard example.-->
+
+<head>
+  <title>Leaderboard</title>
+</head>
+
+<body>
+  <div id="outer">
+    {{loginButtons align="right"}}
+    {{> leaderboard}}
+  </div>
+</body>
+
+<template name="fblogin">
+  <div class="fblogin">
+    
+  </div>
+</template>
+
+<template name="leaderboard">
+  <div class="leaderboard">
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </div>
+
+
+
+  {{#if selected_name}}
+    {{#if currentUser}}
+      {{#if already_voted}}
+      <div class="none">You have already voted, </div>
+      <div class="username">{{currentUser}}</div>
+      {{/if}}
+
+      {{#unless already_voted}}
+      <div class="details">
+        <div class="name">{{selected_name}}</div>
+        <input type="button" class="inc" value="Give Vote" />
+      </div>
+      {{/unless}}
+    {{/if}}
+      
+    {{#unless currentUser}}
+      <div class="none">Please log in to vote.</div>
+
+    {{/unless}}
+       
+  {{/if}}
+
+  {{#unless selected_name}}
+  <div class="none">Click a candidate to select them.</div>
+  {{/unless}}
+</template>
+
+<template name="player">
+  <div class="player {{selected}}">
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
